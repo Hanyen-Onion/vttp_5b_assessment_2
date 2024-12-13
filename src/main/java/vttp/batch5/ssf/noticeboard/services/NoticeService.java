@@ -30,6 +30,11 @@ public class NoticeService {
 	@Autowired
 	private NoticeRepository nRepo;
 
+	public String healthCheck() {
+		String randId = nRepo.randomId();
+		return randId;
+	}
+
 	public String save(Notice notice) {
 		
 		String id;

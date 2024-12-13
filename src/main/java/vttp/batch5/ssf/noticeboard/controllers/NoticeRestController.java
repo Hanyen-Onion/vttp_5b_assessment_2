@@ -1,5 +1,7 @@
 package vttp.batch5.ssf.noticeboard.controllers;
 
+import java.io.File;
+
 import javax.print.attribute.standard.Media;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,16 @@ public class NoticeRestController {
 
     @Autowired
     private NoticeService nSvc;
+
+    @GetMapping(path={"/health"}, produces=MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getMethodName() {
+
+        String randId = nSvc.healthCheck();
+        if (randId != null) {
+            return ResponseEntity.ok("{}");
+        }
+        return ResponseEntity.status(400).body("{}");
+    }
 
     @GetMapping(path="/notice", consumes=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getAPI() {
