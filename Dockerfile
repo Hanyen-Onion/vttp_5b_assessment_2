@@ -52,10 +52,12 @@ ENV SERVER_PORT=8080
 #Tell Docker that the application is listening on $SERVER_PORT
 EXPOSE ${PORT}
 
-#Provide a default commandwith ENTRYPOINT
+#Provide a default command with ENTRYPOINT
 #Command to execute when container starts
 ENTRYPOINT SERVER_PORT=${PORT} java -jar app.jar
 
-#target/noticeboard-0.0.1-SNAPSHOT.jar
+# HEALTHCHECK --interval=60s --timeout=30s --start-period=120s 
+# 	CMD curl -s -f http:/localhost:8080/status || exit 1
 
-#
+
+

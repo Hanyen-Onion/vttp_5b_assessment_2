@@ -1,6 +1,7 @@
 package vttp.batch5.ssf.noticeboard.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,15 +50,19 @@ public class NoticeController {
         }
         System.out.println(notice);
         
-        String id = nSvc.save(notice);
-        notice.setId(id);
-        
-        System.out.println(id);
-       
-        sess.setAttribute("id", id);
+
+            String id = nSvc.save(notice);
+            notice.setId(id);
+            //System.out.println(id);
+            sess.setAttribute("id", id);
+            mav.addObject("id", id);
+
+            mav.setStatus(HttpStatusCode.valueOf(404));
+            mav.setViewName("error");
+ 
         
         mav.addObject("notice", notice);
-        mav.addObject("id", id);
+        
         System.out.println("got accepted");
         mav.setViewName("accepted");
         

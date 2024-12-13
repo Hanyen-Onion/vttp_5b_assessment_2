@@ -52,10 +52,8 @@ public class NoticeService {
 			notice.setId(id);
 			nRepo.insertNotices(notice);
 			System.out.println("gen new id to save");
-			
 		}
 		return id;
-	
 	}
 
 	public Payload getPayload() {
